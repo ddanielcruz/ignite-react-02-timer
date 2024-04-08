@@ -11,6 +11,7 @@ export interface Cycle {
 export type CreateCycleData = Pick<Cycle, 'task' | 'minutesAmount'>
 
 interface CyclesContextType {
+  cycles: Cycle[]
   activeCycle: Cycle | null
   cycleSecondsPassed: number
   onCreateNewCycle: (data: CreateCycleData) => void
@@ -20,6 +21,7 @@ interface CyclesContextType {
 }
 
 export const CyclesContext = createContext<CyclesContextType>({
+  cycles: [],
   activeCycle: null,
   cycleSecondsPassed: 0,
   onCreateNewCycle: () => {},
@@ -78,6 +80,7 @@ export function CyclesContextProvider({
   return (
     <CyclesContext.Provider
       value={{
+        cycles,
         activeCycle,
         cycleSecondsPassed,
         onCreateNewCycle: handleCreateNewCycle,
